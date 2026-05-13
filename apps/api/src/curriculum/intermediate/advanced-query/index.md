@@ -13,11 +13,11 @@ JOIN 把两张（或多张）表按一个匹配条件拼接成更宽的一张结
 ```mermaid
 flowchart LR
   L[左表 c] -->|匹配条件 ON c.id = o.customer_id| R[右表 o]
-  R --> INNER["INNER&nbsp;JOIN<br/>仅保留两边都匹配的行"]
-  R --> LEFT["LEFT&nbsp;JOIN<br/>保留左表所有行，右侧无匹配补 NULL"]
-  R --> RIGHT["RIGHT&nbsp;JOIN<br/>保留右表所有行，左侧无匹配补 NULL"]
-  R --> FULL["FULL&nbsp;OUTER&nbsp;JOIN<br/>两边都保留，无匹配各自补 NULL"]
-  R --> CROSS["CROSS&nbsp;JOIN<br/>笛卡尔积，无 ON 条件"]
+  R --> INNER["INNER JOIN<br/>仅保留两边都匹配的行"]
+  R --> LEFT["LEFT JOIN<br/>保留左表所有行，右侧无匹配补 NULL"]
+  R --> RIGHT["RIGHT JOIN<br/>保留右表所有行，左侧无匹配补 NULL"]
+  R --> FULL["FULL OUTER JOIN<br/>两边都保留，无匹配各自补 NULL"]
+  R --> CROSS["CROSS JOIN<br/>笛卡尔积，无 ON 条件"]
   R --> LAT["LATERAL<br/>右子查询可引用左行的列"]
 ```
 
@@ -178,8 +178,8 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-  ALL["全表行"] --> P["PARTITION&nbsp;BY&nbsp;&lt;p&gt;<br/>切成若干窗口"]
-  P --> O["ORDER&nbsp;BY&nbsp;&lt;o&gt;<br/>窗口内排序"]
+  ALL["全表行"] --> P["PARTITION BY &lt;p&gt;<br/>切成若干窗口"]
+  P --> O["ORDER BY &lt;o&gt;<br/>窗口内排序"]
   O --> F["frame<br/>当前行的聚合范围"]
   F --> CALC["窗口函数计算<br/>每行输出一个值"]
 ```

@@ -29,12 +29,12 @@ SET LOCAL      <name> = <value>;       -- 仅当前事务
 
 ```mermaid
 flowchart TD
-  L1["SET LOCAL &mdash; 当前事务"]
-  L2["SET &mdash; 当前会话"]
-  L3["ALTER USER &mdash; 角色级"]
-  L4["ALTER DATABASE &mdash; 库级"]
-  L5["ALTER SYSTEM &mdash; 全局 auto.conf"]
-  L6["postgresql.conf &mdash; 默认基线"]
+  L1["SET LOCAL — 当前事务"]
+  L2["SET — 当前会话"]
+  L3["ALTER USER — 角色级"]
+  L4["ALTER DATABASE — 库级"]
+  L5["ALTER SYSTEM — 全局 auto.conf"]
+  L6["postgresql.conf — 默认基线"]
   L1 --> L2 --> L3 --> L4 --> L5 --> L6
 ```
 

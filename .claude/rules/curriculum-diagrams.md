@@ -49,8 +49,20 @@ markdown-it 默认 fence renderer 检查 `highlight` 钩子返回值是否以 `<
 
 已在 `apps/web/src/markdown.ts` 实现；后续扩 markdown 集成时不要把 mermaid 分支搬回 highlight 钩子，否则页面会看到 mermaid 源码而不是 SVG。
 
+### 坑 4：HTML named entity（除了少数几个）mermaid 不展开，会原样显示字面字符
+
+Mermaid label 里**只可靠支持** `&lt;` `&gt;` `&amp;` `&quot;` 和"用于规避语法冲突字符"的少数 `&#NNN;`（如 `&#124;` 代 `|`）。其他常见 entity——`&nbsp;` `&mdash;` `&rarr;` `&larr;` `&#10;`（换行）`&copy;` 等——一概不展开，原样输出 entity 字面字符。
+
+- ❌ `["INNER&nbsp;JOIN"]` → 渲染成 `INNER&nbsp;JOIN`
+- ❌ `["SET&mdash;当前会话"]` → 渲染成 `SET&mdash;当前会话`
+- ❌ `["Leaf&#10;k1 &rarr; ctid"]` → 渲染成 `Leaf&#10;k1 &rarr; ctid`
+- ✅ 直接用 Unicode 字面字符：`—`（em dash）、`→`（右箭头）、普通空格
+- ✅ 换行用 `<br/>`（mermaid 的官方语法，不是 `&#10;`）
+- 真的需要锁空格不拆（极端窄盒）：用 Unicode U+00A0 字面字符
+
 ## 写 mermaid 块的 checklist
 
 1. 这一节真的要画图吗？（对照第 1 节表格）—— 不要默认要画
 2. label 里有 `<` `>` `|` 吗？—— 全换 entity 或同义符号
-3. `apps/web/src/markdown.ts` 的 mermaid fence 覆盖还在吗？—— 别误删
+3. label 里写了 `&nbsp;` / `&mdash;` / `&rarr;` / `&#10;` 这类非白名单 entity 吗？—— 换 Unicode 字面字符或 `<br/>`（坑 4）
+4. `apps/web/src/markdown.ts` 的 mermaid fence 覆盖还在吗？—— 别误删

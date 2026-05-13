@@ -21,13 +21,13 @@ ON <table> [USING btree] (<column> [, <column> ...]);
 
 ```mermaid
 flowchart TD
-  R["Root&#10;[k1 ... k4]"]
-  N1["Branch&#10;[k1 ... k2]"]
-  N2["Branch&#10;[k3 ... k4]"]
-  L1["Leaf&#10;k1 &rarr; ctid"]
-  L2["Leaf&#10;k2 &rarr; ctid"]
-  L3["Leaf&#10;k3 &rarr; ctid"]
-  L4["Leaf&#10;k4 &rarr; ctid"]
+  R["Root<br/>[k1 ... k4]"]
+  N1["Branch<br/>[k1 ... k2]"]
+  N2["Branch<br/>[k3 ... k4]"]
+  L1["Leaf<br/>k1 → ctid"]
+  L2["Leaf<br/>k2 → ctid"]
+  L3["Leaf<br/>k3 → ctid"]
+  L4["Leaf<br/>k4 → ctid"]
   R --> N1
   R --> N2
   N1 --> L1
